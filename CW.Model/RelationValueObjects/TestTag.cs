@@ -1,7 +1,7 @@
-﻿using CW.Model.CoreEntities;
-using System;
+﻿using System;
+using CW.TestSystem.Model.CoreEntities;
 
-namespace CW.Model.RelationValueObjects
+namespace CW.TestSystem.Model.RelationValueObjects
 {
     public class TestTag
     {

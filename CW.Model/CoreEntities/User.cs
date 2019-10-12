@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 
-namespace CW.Model.CoreEntities
+namespace CW.TestSystem.Model.CoreEntities
 {
     public class User : IdentityUser
     {

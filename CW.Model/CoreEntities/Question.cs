@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using CW.Model.RelationValueObjects;
+using CW.TestSystem.Model.RelationValueObjects
 
-namespace CW.Model.CoreEntities
+namespace CW.TestSystem.Model.CoreEntities
 {
     public class Question
     {

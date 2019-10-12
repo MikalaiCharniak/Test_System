@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CW.Model.CoreEntities
+namespace CW.TestSystem.Model.CoreEntities
 {
     public class Answer
     {
