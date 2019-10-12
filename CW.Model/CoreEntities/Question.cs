@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using CW.TestSystem.Model.RelationValueObjects
+using CW.TestSystem.Model.RelationValueObjects;
 
 namespace CW.TestSystem.Model.CoreEntities
 {
