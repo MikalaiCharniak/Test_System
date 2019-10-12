@@ -8,6 +8,8 @@ namespace CW.TestSystem.DataProvider.ModelEFConfiguration
     {
         public void Configure(EntityTypeBuilder<TestQuestion> builder)
         {
+            builder.HasKey(x => new { x.TestId, x.QuestionId });
+
             builder.HasOne(x => x.Test).
                 WithMany(x => x.Questions).
                 HasForeignKey(x => x.TestId);
