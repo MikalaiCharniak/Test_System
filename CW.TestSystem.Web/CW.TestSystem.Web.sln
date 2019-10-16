@@ -5,9 +5,11 @@ VisualStudioVersion = 16.0.29326.143
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CW.TestSystem.Web", "CW.TestSystem.Web.csproj", "{412A47EC-EC89-4B91-89C7-B7BB3D30908B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CW.TestSystem.Model", "..\CW.Model\CW.TestSystem.Model.csproj", "{1D6382D4-09A6-4FD0-9DC3-89DC06D30C20}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CW.TestSystem.Model", "..\CW.Model\CW.TestSystem.Model.csproj", "{1D6382D4-09A6-4FD0-9DC3-89DC06D30C20}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CW.TestSystem.DataProvider", "..\CW.TestSystem.DataProvider\CW.TestSystem.DataProvider.csproj", "{C73E543B-EE39-4D80-B21C-E488A9149E0F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CW.TestSystem.DataProvider", "..\CW.TestSystem.DataProvider\CW.TestSystem.DataProvider.csproj", "{C73E543B-EE39-4D80-B21C-E488A9149E0F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CW.TestSystem.Identity", "..\CW.TestSystem.Identity\CW.TestSystem.Identity.csproj", "{16CD9E61-0DC5-4118-BC15-E35F41DEA38E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{C73E543B-EE39-4D80-B21C-E488A9149E0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C73E543B-EE39-4D80-B21C-E488A9149E0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C73E543B-EE39-4D80-B21C-E488A9149E0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16CD9E61-0DC5-4118-BC15-E35F41DEA38E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16CD9E61-0DC5-4118-BC15-E35F41DEA38E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16CD9E61-0DC5-4118-BC15-E35F41DEA38E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16CD9E61-0DC5-4118-BC15-E35F41DEA38E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
