@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CW.TestSystem.DataProvider"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CW.TestSystem.Identity", "..\CW.TestSystem.Identity\CW.TestSystem.Identity.csproj", "{16CD9E61-0DC5-4118-BC15-E35F41DEA38E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CW.TestSystem.CommonLogic", "..\CW.TestSystem.CommonLogic\CW.TestSystem.CommonLogic.csproj", "{9DC1777C-23FA-4750-9551-3522066FE435}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{16CD9E61-0DC5-4118-BC15-E35F41DEA38E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{16CD9E61-0DC5-4118-BC15-E35F41DEA38E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{16CD9E61-0DC5-4118-BC15-E35F41DEA38E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DC1777C-23FA-4750-9551-3522066FE435}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DC1777C-23FA-4750-9551-3522066FE435}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DC1777C-23FA-4750-9551-3522066FE435}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DC1777C-23FA-4750-9551-3522066FE435}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

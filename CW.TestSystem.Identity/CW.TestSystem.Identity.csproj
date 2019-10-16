@@ -5,8 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Services\Interfaces\" />
-    <Folder Include="Services\Implementation\" />
+    <None Remove="Services\Implementation\qjym2g0e.ov1~" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CW.TestSystem.CommonLogic\CW.TestSystem.CommonLogic.csproj" />
+    <ProjectReference Include="..\CW.TestSystem.DataProvider\CW.TestSystem.DataProvider.csproj" />
   </ItemGroup>
 
 </Project>
