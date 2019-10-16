@@ -1,11 +1,12 @@
 ﻿using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using CW.TestSystem.Model.CoreEntities;
-
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using System;
 
 namespace CW.TestSystem.DataProvider.DbInfrastracture
 {
-    public class TestSystemDbContext : DbContext
+    public class TestSystemDbContext : IdentityDbContext<User, Role, Guid>
     {
         public TestSystemDbContext(DbContextOptions<TestSystemDbContext> options) : base(options)
         {
