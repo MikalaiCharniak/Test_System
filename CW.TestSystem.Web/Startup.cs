@@ -31,7 +31,7 @@ namespace CW.TestSystem.Web
                     options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddTransient<IAccountService,AccountService>();
-            services.AddIdentity<User, IdentityRole>(options =>
+            services.AddIdentity<User, Role>(options =>
             {
                 options.User.RequireUniqueEmail = true;
                 options.Password.RequireDigit = false;
@@ -44,7 +44,7 @@ namespace CW.TestSystem.Web
                 options.Lockout.MaxFailedAccessAttempts = 5;
 
             }).AddEntityFrameworkStores<TestSystemDbContext>()
-            .AddDefaultTokenProviders().AddRoles<IdentityRole>();
+            .AddDefaultTokenProviders().AddRoles<Role>();
             services.AddAuthentication(config =>
             {
                 config.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -72,6 +72,9 @@ namespace CW.TestSystem.Web
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseAuthentication();
+            app.UseAuthorization();
+            app.UseJwtTokenInHttpOnlyCookie();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -85,26 +88,22 @@ namespace CW.TestSystem.Web
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
-
             app.UseRouting();
-            app.UseAuthentication();
-            app.UseAuthorization();
-            app.UseJwtTokenInHttpOnlyCookie();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
             });
-            app.UseSpa(spa =>
-            {
-                spa.Options.SourcePath = "ClientApp";
+            //app.UseSpa(spa =>
+            //{
+            //    spa.Options.SourcePath = "ClientApp";
 
-                if (env.IsDevelopment())
-                {
-                    spa.UseReactDevelopmentServer(npmScript: "start");
-                }
-            });
+            //    if (env.IsDevelopment())
+            //    {
+            //        spa.UseReactDevelopmentServer(npmScript: "start");
+            //    }
+            //});
         }
     }
 }

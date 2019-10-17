@@ -34,20 +34,36 @@ namespace CW.TestSystem.Identity.Services.Implementation
 
         public async Task<(bool IsValid, string TokenBody, IList<string> Roles)> SignIn(LoginModel loginModel)
         {
-            var isLogin = await _signInManager.PasswordEmailSignInAsync(_userManager, loginModel.Email, loginModel.Password);
-            if (!(isLogin == SignInResult.Success)) return (IsValid: false, TokenBody: null, Roles: null);
-            var user = await _context.Users.FirstOrDefaultAsync(x => x.Email == loginModel.Email);
-            var userRoles = await _userManager.GetRolesAsync(user);
-            var token = GenerateAccessToken(user, userRoles);
-            return (IsValid: true, TokenBody: token, Roles: userRoles);
+            try
+            {
+                var isLogin = await _signInManager.PasswordEmailSignInAsync(_userManager, loginModel.Email, loginModel.Password);
+                if (!(isLogin == SignInResult.Success)) return (IsValid: false, TokenBody: null, Roles: null);
+                var user = await _context.Users.FirstOrDefaultAsync(x => x.Email == loginModel.Email);
+                var userRoles = await _userManager.GetRolesAsync(user);
+                var token = GenerateAccessToken(user, userRoles);
+                return (IsValid: true, TokenBody: token, Roles: userRoles);
+            }
+            catch (Exception ex)
+            { 
+            
+            }
+            return (IsValid: false, TokenBody: null, Roles: null);
         }
 
         public async Task<bool> SignUp(RegistrationModel registrationModel)
         {
-            User appUser = new User() { Email = registrationModel.Email, UserName = registrationModel.Name };
-            IdentityResult isUserCreated = await _userManager.CreateAsync(appUser, registrationModel.Password);
-            IdentityResult isRoleCreated = await _userManager.AddToRoleAsync(appUser, UserRoles.TestableUser);
-            return isUserCreated == IdentityResult.Success && isRoleCreated == IdentityResult.Success ? true : false;
+            try
+            {
+                User appUser = new User() { Email = registrationModel.Email, UserName = registrationModel.Name };
+                IdentityResult isUserCreated = await _userManager.CreateAsync(appUser, registrationModel.Password);
+                IdentityResult isRoleCreated = await _userManager.AddToRoleAsync(appUser, UserRoles.TestableUser);
+                return isUserCreated == IdentityResult.Success && isRoleCreated == IdentityResult.Success ? true : false;
+            }
+            catch (Exception ex)
+            { 
+            
+            }
+            return false;
         }
 
         private string GenerateAccessToken(User user, IList<string> roles)

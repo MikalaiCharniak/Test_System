@@ -12,7 +12,8 @@ namespace CW.TestSystem.Identity.Infrastructure.Extensions
             bool isPersistent = false, bool shouldLockout = false)
         {  
             var user = await userManager.FindByEmailAsync(email);
-            return await signInManager.PasswordSignInAsync(user.UserName, password, isPersistent, shouldLockout);
+            var result = await signInManager.PasswordSignInAsync(user.UserName, password, isPersistent, shouldLockout);
+            return result;
         }
     }
 }

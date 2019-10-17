@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 using CW.TestSystem.Identity.Infrastructure.Models.UserPresentation;
 using CW.TestSystem.Identity.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CW.TestSystem.Web.Controllers
 {
@@ -22,10 +24,10 @@ namespace CW.TestSystem.Web.Controllers
         [HttpPost("signin")]
         public async Task<IActionResult> SignIn(LoginModel loginModel)
         {
-            var result = await _accountService.SignIn(loginModel);
-            if (!result.IsValid) return Unauthorized("Wrong login or password");
-            SetCookieSecurityToken(result.TokenBody);
-            return Ok(result.Roles);
+            (bool IsValid, string TokenBody, IList<string> Roles) = await _accountService.SignIn(loginModel);
+            if (!IsValid) return Unauthorized("Wrong login or password");
+            SetCookieSecurityToken(TokenBody);
+            return Ok(Roles);
         }
 
         [HttpPost("signup")]
@@ -33,6 +35,13 @@ namespace CW.TestSystem.Web.Controllers
         {
             var result = await _accountService.SignUp(registrationModel);
             return result ? (IActionResult)Ok() : BadRequest();
+        }
+
+        [Authorize]
+        [HttpGet("check")]
+        public IActionResult CheckAuthorize()
+        {
+            return Ok();
         }
 
         private void SetCookieSecurityToken(string token)
