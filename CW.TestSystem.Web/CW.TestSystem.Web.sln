@@ -9,9 +9,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CW.TestSystem.Model", "..\C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CW.TestSystem.DataProvider", "..\CW.TestSystem.DataProvider\CW.TestSystem.DataProvider.csproj", "{C73E543B-EE39-4D80-B21C-E488A9149E0F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CW.TestSystem.Identity", "..\CW.TestSystem.Identity\CW.TestSystem.Identity.csproj", "{16CD9E61-0DC5-4118-BC15-E35F41DEA38E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CW.TestSystem.Identity", "..\CW.TestSystem.Identity\CW.TestSystem.Identity.csproj", "{16CD9E61-0DC5-4118-BC15-E35F41DEA38E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CW.TestSystem.CommonLogic", "..\CW.TestSystem.CommonLogic\CW.TestSystem.CommonLogic.csproj", "{9DC1777C-23FA-4750-9551-3522066FE435}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CW.TestSystem.CommonLogic", "..\CW.TestSystem.CommonLogic\CW.TestSystem.CommonLogic.csproj", "{9DC1777C-23FA-4750-9551-3522066FE435}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.Test", "..\Identity.Test\Identity.Test.csproj", "{801D4E8F-4A50-40A2-992C-464E4E8D41B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CW.TestSystem.GraphQLTypes", "..\CW.TestSystem.GraphQLTypes\CW.TestSystem.GraphQLTypes.csproj", "{FEC09339-6D78-4461-9690-917E3868AE22}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CW.TestSystem.BusinessLogic", "..\CW.TestSystem.BusinessLogic\CW.TestSystem.BusinessLogic.csproj", "{61BF582B-5497-4FF6-8A5E-D62A874E0386}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +45,18 @@ Global
 		{9DC1777C-23FA-4750-9551-3522066FE435}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9DC1777C-23FA-4750-9551-3522066FE435}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9DC1777C-23FA-4750-9551-3522066FE435}.Release|Any CPU.Build.0 = Release|Any CPU
+		{801D4E8F-4A50-40A2-992C-464E4E8D41B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{801D4E8F-4A50-40A2-992C-464E4E8D41B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{801D4E8F-4A50-40A2-992C-464E4E8D41B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{801D4E8F-4A50-40A2-992C-464E4E8D41B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEC09339-6D78-4461-9690-917E3868AE22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEC09339-6D78-4461-9690-917E3868AE22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEC09339-6D78-4461-9690-917E3868AE22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEC09339-6D78-4461-9690-917E3868AE22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61BF582B-5497-4FF6-8A5E-D62A874E0386}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61BF582B-5497-4FF6-8A5E-D62A874E0386}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61BF582B-5497-4FF6-8A5E-D62A874E0386}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61BF582B-5497-4FF6-8A5E-D62A874E0386}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

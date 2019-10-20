@@ -15,6 +15,12 @@ using System;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using HotChocolate;
+using HotChocolate.AspNetCore;
+using HotChocolate.AspNetCore.Voyager;
+using CW.TestSystem.GraphQLTypes.ObjectTypes;
+using HotChocolate.Execution.Configuration;
+using CW.TestSystem.GraphQLTypes.OperationTypes;
 
 namespace CW.TestSystem.Web
 {
@@ -30,7 +36,23 @@ namespace CW.TestSystem.Web
             services.AddDbContext<TestSystemDbContext>(options =>
                     options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddTransient<IAccountService,AccountService>();
+            services.AddGraphQL(sp => SchemaBuilder.New()
+               .AddServices(sp)
+            .AddAuthorizeDirectiveType()
+            .AddQueryType<QueryType>()
+            .AddType<TestType>()
+            .AddType<QuestionType>()
+            .AddType<ResultType>()
+            .AddType<AnswerType>()
+            .AddType<UserType>()
+            .AddType<TagType>()
+            .Create(),
+            new QueryExecutionOptions
+            {
+                MaxOperationComplexity = 10,
+                UseComplexityMultipliers = true
+            });
+            services.AddScoped<IAccountService, AccountService>();
             services.AddIdentity<User, Role>(options =>
             {
                 options.User.RequireUniqueEmail = true;
@@ -89,6 +111,10 @@ namespace CW.TestSystem.Web
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
             app.UseRouting();
+            app.UseGraphQL();
+            app.UseGraphiQL();
+            app.UsePlayground();
+            app.UseVoyager();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

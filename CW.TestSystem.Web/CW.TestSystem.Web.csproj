@@ -10,6 +10,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="HotChocolate.AspNetCore" Version="10.1.1" />
+    <PackageReference Include="HotChocolate.AspNetCore.Authorization" Version="10.1.1" />
+    <PackageReference Include="HotChocolate.AspNetCore.GraphiQL" Version="10.1.1" />
+    <PackageReference Include="HotChocolate.AspNetCore.Playground" Version="10.1.1" />
+    <PackageReference Include="HotChocolate.AspNetCore.Voyager" Version="10.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.0.0">
@@ -35,6 +40,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CW.Model\CW.TestSystem.Model.csproj" />
     <ProjectReference Include="..\CW.TestSystem.DataProvider\CW.TestSystem.DataProvider.csproj" />
+    <ProjectReference Include="..\CW.TestSystem.GraphQLTypes\CW.TestSystem.GraphQLTypes.csproj" />
     <ProjectReference Include="..\CW.TestSystem.Identity\CW.TestSystem.Identity.csproj" />
   </ItemGroup>
 
