@@ -40,6 +40,7 @@ namespace CW.TestSystem.Web
                .AddServices(sp)
             .AddAuthorizeDirectiveType()
             .AddQueryType<QueryType>()
+            .AddMutationType<MutationType>()
             .AddType<TestType>()
             .AddType<QuestionType>()
             .AddType<ResultType>()
