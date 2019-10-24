@@ -5,16 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="HotChocolate.AspNetCore" Version="10.1.1" />
+    <PackageReference Include="GraphQL" Version="3.0.0-preview-1271" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CW.Model\CW.TestSystem.Model.csproj" />
     <ProjectReference Include="..\CW.TestSystem.DataProvider\CW.TestSystem.DataProvider.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Resolvers\" />
   </ItemGroup>
 
 </Project>
