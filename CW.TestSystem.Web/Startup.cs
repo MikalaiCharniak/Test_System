@@ -1,26 +1,23 @@
+using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using CW.TestSystem.DataProvider.DbInfrastracture;
 using CW.TestSystem.Identity.Services.Interfaces;
 using CW.TestSystem.Identity.Services.Implementation;
-using CW.TestSystem.Model.CoreEntities;
+using CW.TestSystem.BusinessLogic.Types;
+using CW.TestSystem.BusinessLogic.Operations;
 using CW.TestSystem.Web.Infrastructure;
-using Microsoft.AspNetCore.Identity;
-using System;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using HotChocolate;
-using HotChocolate.AspNetCore;
-using HotChocolate.AspNetCore.Voyager;
-using CW.TestSystem.GraphQLTypes.ObjectTypes;
-using HotChocolate.Execution.Configuration;
-using CW.TestSystem.GraphQLTypes.OperationTypes;
+using CW.TestSystem.Model.CoreEntities;
+using CW.TestSystem.BusinessLogic.Definitions;
+using GraphQL.Types;
+using GraphQL;
+using GraphQL.Server;
 
 namespace CW.TestSystem.Web
 {
@@ -36,24 +33,20 @@ namespace CW.TestSystem.Web
             services.AddDbContext<TestSystemDbContext>(options =>
                     options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddGraphQL(sp => SchemaBuilder.New()
-               .AddServices(sp)
-            .AddAuthorizeDirectiveType()
-            .AddQueryType<QueryType>()
-            .AddMutationType<MutationType>()
-            .AddType<TestType>()
-            .AddType<QuestionType>()
-            .AddType<ResultType>()
-            .AddType<AnswerType>()
-            .AddType<UserType>()
-            .AddType<TagType>()
-            .Create(),
-            new QueryExecutionOptions
-            {
-                MaxOperationComplexity = 10,
-                UseComplexityMultipliers = true
-            });
+            services.AddLogging(builder => builder.AddConsole());
+            services.AddSingleton<IDocumentExecuter, DocumentExecuter>();
             services.AddScoped<IAccountService, AccountService>();
+            services.AddSingleton<TestType>();
+            services.AddSingleton<TestSystemQuery>();
+            services.AddSingleton<ISchema, TestSystemSchema>();
+            services.AddSingleton<ISchema, TestSystemSchema>();
+            services.AddHttpContextAccessor();
+
+            services.AddGraphQL(_ =>
+            {
+                _.EnableMetrics = true;
+                _.ExposeExceptions = true;
+            });
             services.AddIdentity<User, Role>(options =>
             {
                 options.User.RequireUniqueEmail = true;
@@ -68,24 +61,6 @@ namespace CW.TestSystem.Web
 
             }).AddEntityFrameworkStores<TestSystemDbContext>()
             .AddDefaultTokenProviders().AddRoles<Role>();
-            services.AddAuthentication(config =>
-            {
-                config.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                config.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                config.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-
-            }).AddJwtBearer(config =>
-            {
-                config.RequireHttpsMetadata = true;
-                config.SaveToken = true;
-                config.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidIssuer = Configuration["JWT:Issuer"],
-                    ValidAudience = Configuration["JWT:Issuer"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:SecretKey"])),
-                    ClockSkew = TimeSpan.Zero
-                };
-            });
             services.AddAuthorization();
             services.AddControllersWithViews();
             services.AddSpaStaticFiles(configuration =>
@@ -107,15 +82,11 @@ namespace CW.TestSystem.Web
                 app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
-
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
             app.UseRouting();
-            app.UseGraphQL();
-            app.UseGraphiQL();
-            app.UsePlayground();
-            app.UseVoyager();
+            app.UseGraphQLPlayground();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

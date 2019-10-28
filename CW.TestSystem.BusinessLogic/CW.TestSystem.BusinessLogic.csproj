@@ -15,7 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CW.Model\CW.TestSystem.Model.csproj" />
     <ProjectReference Include="..\CW.TestSystem.DataProvider\CW.TestSystem.DataProvider.csproj" />
   </ItemGroup>
 

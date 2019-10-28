@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CW.TestSystem.BusinessLogic.Operations
 {
-    public class Subscription
+    class TestSystemMutation
     {
     }
 }
