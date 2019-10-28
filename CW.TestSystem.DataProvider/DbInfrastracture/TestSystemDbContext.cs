@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using CW.TestSystem.Model.CoreEntities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System;
+using CW.TestSystem.Model.RelationValueObjects;
 
 namespace CW.TestSystem.DataProvider.DbInfrastracture
 {

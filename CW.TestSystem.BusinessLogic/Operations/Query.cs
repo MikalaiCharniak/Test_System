@@ -1,33 +1,23 @@
-﻿using CW.TestSystem.Model.CoreEntities;
+﻿using System;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using HotChocolate;
+using CW.TestSystem.Model.CoreEntities;
 using CW.TestSystem.DataProvider.DbInfrastracture;
-using System;
-using System.Linq;
-using System.Collections.Generic;
 
 namespace CW.TestSystem.BusinessLogic.Operations
 {
     public class Query
     {
-        private readonly TestSystemDbContext _context;
-        public Query(TestSystemDbContext context)
-        {
-            _context = context;
-        }
-
-        public Test GetTest(Guid id)
-        {
-            var test  =_context.Tests.SingleOrDefault(x => x.Id == id);
-            return test;
-        }
-
-        public IEnumerable<Tag> GetAllTags()
-        {
-            return _context.Tags;        
-        }
-
-        public IEnumerable<Test> GetAllTest()
-        {
-            return _context.Tests;
-        }
+        public async Task<Test> GetTestAsync([Service] TestSystemDbContext context, Guid id) =>
+               await context.Tests.SingleOrDefaultAsync(x => x.Id == id);
+        public async Task<Tag> GetTagAsync([Service] TestSystemDbContext context, Guid id) =>
+               await context.Tags.FindAsync(id);
+        public async Task<Result> GetResultAsync([Service] TestSystemDbContext context, Guid id) =>
+               await context.Results.FindAsync(id);
+        public async Task<User> GetUserAsync([Service] TestSystemDbContext context, Guid id) =>
+               await context.Users.FindAsync(id);
+        public async Task<Question> GetQuestionAsync([Service] TestSystemDbContext context, Guid id) =>
+               await context.Questions.FindAsync(id);
     }
 }

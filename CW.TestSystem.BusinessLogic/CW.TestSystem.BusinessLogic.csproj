@@ -5,16 +5,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Resolvers\**" />
+    <EmbeddedResource Remove="Resolvers\**" />
+    <None Remove="Resolvers\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="HotChocolate.AspNetCore" Version="10.1.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\CW.Model\CW.TestSystem.Model.csproj" />
     <ProjectReference Include="..\CW.TestSystem.DataProvider\CW.TestSystem.DataProvider.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Resolvers\" />
   </ItemGroup>
 
 </Project>
