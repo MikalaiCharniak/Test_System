@@ -10,12 +10,12 @@ using Microsoft.Extensions.Logging;
 using CW.TestSystem.DataProvider.DbInfrastracture;
 using CW.TestSystem.Identity.Services.Interfaces;
 using CW.TestSystem.Identity.Services.Implementation;
-using CW.TestSystem.BusinessLogic.Types;
-using CW.TestSystem.BusinessLogic.Operations;
 using CW.TestSystem.Web.Infrastructure;
 using CW.TestSystem.Model.CoreEntities;
-using CW.TestSystem.BusinessLogic.Definitions;
+using CW.TestSystem.BusinessLogic.Types.Operations;
+using CW.TestSystem.BusinessLogic.Types.Models;
 using HotChocolate.AspNetCore;
+using HotChocolate;
 
 namespace CW.TestSystem.Web
 {
@@ -32,19 +32,16 @@ namespace CW.TestSystem.Web
                     options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddLogging(builder => builder.AddConsole());
-            services.AddSingleton<IDocumentExecuter, DocumentExecuter>();
             services.AddScoped<IAccountService, AccountService>();
-            services.AddSingleton<TestType>();
-            services.AddSingleton<TestSystemQuery>();
-            services.AddSingleton<ISchema, TestSystemSchema>();
-            services.AddSingleton<ISchema, TestSystemSchema>();
-            services.AddHttpContextAccessor();
-
-            services.AddGraphQL(_ =>
-            {
-                _.EnableMetrics = true;
-                _.ExposeExceptions = true;
-            });
+            services.AddGraphQL(sp => SchemaBuilder.New()
+            .AddQueryType<QueryType>().
+            AddType<TestType>().
+            AddType<QuestionType>().
+            AddType<UserType>().
+            AddType<AnswerType>().
+            AddType<ResultType>().
+            AddType<TagType>()
+            .Create());
             services.AddIdentity<User, Role>(options =>
             {
                 options.User.RequireUniqueEmail = true;
@@ -85,6 +82,7 @@ namespace CW.TestSystem.Web
             app.UseSpaStaticFiles();
             app.UseRouting();
             app.UseGraphQL();
+            app.UseGraphiQL();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

@@ -6,5 +6,6 @@ namespace CW.TestSystem.BusinessLogic.Operations
 {
     public class Query
     {
+        public string Hello() => "hey";
     }
 }

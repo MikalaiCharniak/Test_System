@@ -1,11 +1,11 @@
-﻿using CW.TestSystem.Model.CoreEntities;
-using HotChocolate.Configuration;
+﻿using CW.TestSystem.BusinessLogic.Operations;
 using HotChocolate.Types;
+using HotChocolate.Configuration;
 using HotChocolate.Types.Descriptors.Definitions;
 
-namespace CW.TestSystem.BusinessLogic.Types.Models
+namespace CW.TestSystem.BusinessLogic.Types.Operations
 {
-    public class AnswerType : ObjectType<Answer>
+    public class MutationType : ObjectType<Mutation>
     {
         protected override ObjectTypeDefinition CreateDefinition(IInitializationContext context)
         {
