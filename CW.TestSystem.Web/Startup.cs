@@ -15,9 +15,7 @@ using CW.TestSystem.BusinessLogic.Operations;
 using CW.TestSystem.Web.Infrastructure;
 using CW.TestSystem.Model.CoreEntities;
 using CW.TestSystem.BusinessLogic.Definitions;
-using GraphQL.Types;
-using GraphQL;
-using GraphQL.Server;
+using HotChocolate.AspNetCore;
 
 namespace CW.TestSystem.Web
 {
@@ -86,7 +84,7 @@ namespace CW.TestSystem.Web
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
             app.UseRouting();
-            app.UseGraphQLPlayground();
+            app.UseGraphQL();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
