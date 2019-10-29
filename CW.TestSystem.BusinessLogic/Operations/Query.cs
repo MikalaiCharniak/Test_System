@@ -1,11 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using CW.TestSystem.DataProvider.DbInfrastracture;
+using CW.TestSystem.Model.CoreEntities;
+using HotChocolate;
+using System;
 
 namespace CW.TestSystem.BusinessLogic.Operations
 {
     public class Query
     {
-        public string Hello() => "hey";
+        public Test GetTest([Service] TestSystemDbContext context,Guid id)
+        {
+            return context.Tests.Find(id);
+        }
     }
 }
