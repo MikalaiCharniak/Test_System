@@ -1,15 +1,24 @@
 ﻿using CW.TestSystem.Model.CoreEntities;
-using HotChocolate.Configuration;
 using HotChocolate.Types;
-using HotChocolate.Types.Descriptors.Definitions;
 
 namespace CW.TestSystem.BusinessLogic.Types.Models
 {
     public class AnswerType : ObjectType<Answer>
     {
-        protected override ObjectTypeDefinition CreateDefinition(IInitializationContext context)
+        protected override void Configure(IObjectTypeDescriptor<Answer> descriptor)
         {
-            return base.CreateDefinition(context);
+            descriptor.Field(x => x.Id).
+                Type<NonNullType<IdType>>().
+                Description("Unique Guid Id of Answer");
+            descriptor.Field(x => x.Text).
+                Type<NonNullType<StringType>>().
+                Description("Text of answer");
+            descriptor.Field(x => x.Correct).
+                Type<NonNullType<BooleanType>>().
+                Description("Is answer correct? Bool type for this. true - correct/ false - incorrect");
+            descriptor.Field(x => x.QuestionId).
+                Type<NonNullType<IdType>>().
+                Description("Unique Guid Id of question, which contain this answer");
         }
     }
 }
