@@ -1,14 +1,14 @@
 ﻿using CW.TestSystem.Model.CoreEntities;
+using CW.TestSystem.BusinessLogic.Infrastructure.Extensions;
 using HotChocolate.Types;
 using CW.TestSystem.DataProvider.DbInfrastracture;
-using HotChocolate;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace CW.TestSystem.BusinessLogic.Types.Models
 {
     public class TestType : ObjectType<Test>
     {
-
-        private TestSystemDbContext _dbContext;
         protected override void Configure(IObjectTypeDescriptor<Test> descriptor)
         {
             descriptor.Field(x => x.Id).
@@ -28,17 +28,21 @@ namespace CW.TestSystem.BusinessLogic.Types.Models
                        Description("Set of questions for Test").
                        Resolver(ctx =>
                        {
-                           _dbContext ??= ctx.Service<TestSystemDbContext>();
-                           var questions = _dbContext.Questions;
-                           return questions;
+                           var _dbContext = ctx.Service<TestSystemDbContext>();
+                           var questions = _dbContext.Tests.Include(x => x.Questions).ThenInclude(x => x.Question).
+                           Where(x => x.Id == ctx.GetGuidId()).SelectMany(x => x.Questions).
+                           Select(x => x.Question);
+                           return questions.ToList();
                        });
             descriptor.Field(x => x.Tags).
                        Type<ListType<TagType>>().
                        Description("Set of tags for Test").
                        Resolver(ctx =>
                        {
-                           _dbContext ??= ctx.Service<TestSystemDbContext>();
-                           var tags = _dbContext.Tags;
+                           var _dbContext = ctx.Service<TestSystemDbContext>();
+                           var tags = _dbContext.Tests.Include(x => x.Tags).ThenInclude(x => x.Tag).
+                           Where(x => x.Id == ctx.GetGuidId()).SelectMany(x => x.Tags).
+                           Select(x => x.Tag);
                            return tags;
                        });
         }
