@@ -16,6 +16,9 @@ namespace CW.TestSystem.BusinessLogic.Types.InputModels
             descriptor.Field(x => x.Questions).
                        Type<NonNullType<ListType<QuestionInput>>>().
                        Description("Test cannot be created without any questions!");
+            descriptor.Ignore(x => x.Id);
+            descriptor.Ignore(x => x.Results);
+            descriptor.Ignore(x => x.CreateDate);
         }
     }
 }
