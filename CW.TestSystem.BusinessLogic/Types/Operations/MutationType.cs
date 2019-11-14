@@ -1,7 +1,5 @@
 ﻿using CW.TestSystem.BusinessLogic.Operations;
 using HotChocolate.Types;
-using HotChocolate.Configuration;
-using HotChocolate.Types.Descriptors.Definitions;
 
 namespace CW.TestSystem.BusinessLogic.Types.Operations
 {
@@ -9,8 +7,10 @@ namespace CW.TestSystem.BusinessLogic.Types.Operations
     {
         protected override void Configure(IObjectTypeDescriptor<Mutation> descriptor)
         {
-            descriptor.Field(x => x.CreateTestAsync(default, default, default)).
+            descriptor.Field(x => x.CreateTestAsync(default, default)).
                        Description("Create new test with few already existing questions");
+            descriptor.Field(x => x.CreateQuestionAsync(default, default)).
+                       Description("Create new question. New question must include list of answers");
         }
     }
 }

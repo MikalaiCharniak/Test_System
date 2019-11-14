@@ -1,5 +1,4 @@
 using System;
-using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -17,8 +16,6 @@ using CW.TestSystem.BusinessLogic.Types.Operations;
 using CW.TestSystem.BusinessLogic.Types.Models;
 using HotChocolate.AspNetCore;
 using HotChocolate;
-using AutoMapper;
-using CW.TestSystem.BusinessLogic.Infrastructure.Mapping;
 using CW.TestSystem.BusinessLogic.Types.InputModels;
 
 namespace CW.TestSystem.Web
@@ -35,7 +32,6 @@ namespace CW.TestSystem.Web
             services.AddDbContext<TestSystemDbContext>(options =>
                     options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddAutoMapper(Assembly.GetAssembly(typeof(InputModelsProfile)));
             services.AddLogging(builder => builder.AddConsole());
             services.AddScoped<IAccountService, AccountService>();
             services.AddGraphQL(sp => SchemaBuilder.New()
@@ -49,7 +45,8 @@ namespace CW.TestSystem.Web
             AddType<TagType>().
             AddType<TestInput>().
             AddType<QuestionInput>().
-            AddType<AnswerType>()
+            AddType<AnswerType>().
+            AddType<AnswerInput>()
             .Create());
             services.AddIdentity<User, Role>(options =>
             {

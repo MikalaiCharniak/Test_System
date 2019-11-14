@@ -13,6 +13,9 @@ namespace CW.TestSystem.BusinessLogic.Types.InputModels
             descriptor.Field(x => x.Correct).
                        Type<NonNullType<BooleanType>>().
                        Description("Correct answer or no (true or false)");
+            descriptor.Ignore(x => x.Id);
+            descriptor.Ignore(x => x.QuestionId);
+            descriptor.Ignore(x => x.Question);
         }
     }
 }
