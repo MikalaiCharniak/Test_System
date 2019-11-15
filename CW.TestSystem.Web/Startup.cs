@@ -17,6 +17,7 @@ using CW.TestSystem.BusinessLogic.Types.Models;
 using HotChocolate.AspNetCore;
 using HotChocolate;
 using CW.TestSystem.BusinessLogic.Types.InputModels;
+using CW.TestSystem.BusinessLogic.Logic;
 
 namespace CW.TestSystem.Web
 {

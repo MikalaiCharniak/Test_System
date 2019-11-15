@@ -1,11 +1,10 @@
-﻿using CW.TestSystem.BusinessLogic.Operations;
-using HotChocolate.Types;
+﻿using HotChocolate.Types;
 using HotChocolate.Configuration;
 using HotChocolate.Types.Descriptors.Definitions;
 
 namespace CW.TestSystem.BusinessLogic.Types.Operations
 {
-    public class SubscriptionType : ObjectType<Subscription>
+    public class SubscriptionType : ObjectType
     {
         protected override ObjectTypeDefinition CreateDefinition(IInitializationContext context)
         {

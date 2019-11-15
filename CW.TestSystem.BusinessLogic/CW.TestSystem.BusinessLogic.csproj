@@ -20,4 +20,8 @@
     <ProjectReference Include="..\CW.TestSystem.DataProvider\CW.TestSystem.DataProvider.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Logic\Queries\" />
+  </ItemGroup>
+
 </Project>

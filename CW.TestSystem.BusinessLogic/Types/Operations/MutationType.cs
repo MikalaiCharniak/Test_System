@@ -1,16 +1,32 @@
-﻿using CW.TestSystem.BusinessLogic.Operations;
+﻿using CW.TestSystem.BusinessLogic.Logic.Commands;
+using CW.TestSystem.BusinessLogic.Types.InputModels;
+using CW.TestSystem.BusinessLogic.Types.Models;
 using HotChocolate.Types;
 
 namespace CW.TestSystem.BusinessLogic.Types.Operations
 {
-    public class MutationType : ObjectType<Mutation>
+    public partial class MutationType : ObjectType
     {
-        protected override void Configure(IObjectTypeDescriptor<Mutation> descriptor)
+        protected  override void Configure(IObjectTypeDescriptor descriptor)
         {
-            descriptor.Field(x => x.CreateTestAsync(default, default)).
-                       Description("Create new test with few already existing questions");
-            descriptor.Field(x => x.CreateQuestionAsync(default, default)).
-                       Description("Create new question. New question must include list of answers");
+            #region QuestionType
+            descriptor.Field<QuestionMutationResolver>(x => x.CreateQuestionAsync(default, default)).
+                Name("createQuestion").
+                Type<QuestionType>().
+                Argument("questionInput", x => x.Type<QuestionInput>());
+            descriptor.Field<QuestionMutationResolver>(x => x.UpdateQuestionAsync(default, default)).
+                Name("updateQuestion").
+                Type<QuestionType>().
+                Argument("updateQuestion", x => x.Type<QuestionInput>());
+            descriptor.Field<QuestionMutationResolver>(x => x.DeleteQuestionAsync(default, default)).
+                Name("removeQuestion").
+                Type<BooleanType>().
+                Argument("id", x => x.Type<IdType>());
+            #endregion 
+            descriptor.Field<TestMutationResolver>(x => x.CreateTestAsync(default, default)).
+                Name("createTest").
+                Type<TestType>().
+                Argument("testInput", x => x.Type<TestInput>());
         }
     }
 }

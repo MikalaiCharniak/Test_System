@@ -14,7 +14,8 @@ namespace CW.TestSystem.DataProvider.ModelEFConfiguration
 
             builder.HasMany(x => x.Answers).
                 WithOne(x => x.Question).
-                HasForeignKey(x => x.QuestionId);
+                HasForeignKey(x => x.QuestionId).
+                OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
