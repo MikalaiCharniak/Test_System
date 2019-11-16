@@ -37,7 +37,22 @@ namespace CW.TestSystem.BusinessLogic.Types.Operations
                 Name("updateTest").
                 Type<TestType>().
                 Argument("updateTest", x => x.Type<TestInput>());
-            #endregion 
+            #endregion
+
+            #region Tag Type
+            descriptor.Field<TagMutationResolver>(x => x.CreateTagAsync(default, default)).
+                Name("createTag").
+                Type<TagType>().
+                Argument("inputTag", x => x.Type<TagInput>());
+            descriptor.Field<TagMutationResolver>(x => x.DeleteTagAsync(default, default)).
+                Name("removeTag").
+                Type<BooleanType>().
+                Argument("id", x => x.Type<IdType>());
+            descriptor.Field<TagMutationResolver>(x => x.UpdateTagAsync(default, default)).
+                Name("updateTag").
+                Type<TagType>().
+                Argument("updateTag", x => x.Type<TagInput>());
+            #endregion
         }
     }
 }
