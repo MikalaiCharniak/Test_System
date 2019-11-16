@@ -7,6 +7,9 @@ namespace CW.TestSystem.BusinessLogic.Types.InputModels
     {
         protected override void Configure(IInputObjectTypeDescriptor<Test> descriptor)
         {
+            descriptor.Field(x => x.Id).
+                       Type<IdType>().
+                       Description("Unique Id of Test. Should be used only for updating.");
             descriptor.Field(x => x.Title).
                        Type<NonNullType<StringType>>().
                        Description("Title of test. Can not be null or empty");
@@ -16,7 +19,6 @@ namespace CW.TestSystem.BusinessLogic.Types.InputModels
             descriptor.Field(x => x.Questions).
                        Type<NonNullType<ListType<QuestionInput>>>().
                        Description("Test cannot be created without any questions!");
-            descriptor.Ignore(x => x.Id);
             descriptor.Ignore(x => x.Results);
             descriptor.Ignore(x => x.CreateDate);
         }

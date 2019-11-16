@@ -22,11 +22,22 @@ namespace CW.TestSystem.BusinessLogic.Types.Operations
                 Name("removeQuestion").
                 Type<BooleanType>().
                 Argument("id", x => x.Type<IdType>());
-            #endregion 
+            #endregion
+
+            #region TestType
             descriptor.Field<TestMutationResolver>(x => x.CreateTestAsync(default, default)).
                 Name("createTest").
                 Type<TestType>().
                 Argument("testInput", x => x.Type<TestInput>());
+            descriptor.Field<TestMutationResolver>(x => x.DeleteTestAsync(default, default)).
+                Name("deleteTest").
+                Type<TestType>().
+                Argument("id", x => x.Type<IdType>());
+            descriptor.Field<TestMutationResolver>(x => x.UpdateTestAsync(default, default)).
+                Name("updateTest").
+                Type<TestType>().
+                Argument("updateTest", x => x.Type<TestInput>());
+            #endregion 
         }
     }
 }
