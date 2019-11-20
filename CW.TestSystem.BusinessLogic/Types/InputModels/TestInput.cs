@@ -1,8 +1,13 @@
 ﻿using CW.TestSystem.Model.CoreEntities;
 using HotChocolate.Types;
+using System;
+using System.Collections.Generic;
 
 namespace CW.TestSystem.BusinessLogic.Types.InputModels
 {
+    /// <summary>
+    /// Rather strange class - in case many bugs with implementation with "normal" Test model
+    /// </summary>
     public class TestInput : InputObjectType<Test>
     {
         protected override void Configure(IInputObjectTypeDescriptor<Test> descriptor)
@@ -17,10 +22,10 @@ namespace CW.TestSystem.BusinessLogic.Types.InputModels
                        Type<NonNullType<StringType>>().
                        Description("Test must have short or long description");
             descriptor.Field(x => x.Questions).
-                       Type<NonNullType<ListType<QuestionInput>>>().
+                       Type<NonNullType<ListType<TestQuestionInput>>>().
                        Description("Test cannot be created without any questions!");
-            descriptor.Ignore(x => x.Results);
             descriptor.Ignore(x => x.CreateDate);
+            descriptor.Ignore(x => x.Tags);
         }
     }
 }
