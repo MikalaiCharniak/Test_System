@@ -5,7 +5,7 @@ using CW.TestSystem.Model.CoreEntities;
 using System.Threading.Tasks;
 using System;
 using System.Linq;
-using CW.TestSystem.BusinessLogic.Types.InputModels;
+using CW.TestSystem.BusinessLogic.Infrastructure.RelationModels;
 
 namespace CW.TestSystem.BusinessLogic.Logic.Commands
 {
@@ -16,12 +16,17 @@ namespace CW.TestSystem.BusinessLogic.Logic.Commands
 
             testInput.CreateDate = DateTime.Now;
             var test = context.Tests.Add(testInput);
-            //test.Entity.Questions.ToList().ForEach(x => x.TestId = test.Entity.Id);
-            //context.TestQuestion.AddRange(test.Entity.Questions);
             await context.SaveChangesAsync();
             return test.Entity;
         }
 
+        public async Task<bool> AddQuestionsAsync([Service] TestSystemDbContext context, TestQuestionRelation testQuestions)
+        {
+            testQuestions.TestsQuestions.ToList().ForEach(x => x.TestId = testQuestions.TestId);
+            context.TestQuestion.AddRange(testQuestions.TestsQuestions);
+            await context.SaveChangesAsync();
+            return true;
+        }
         public async Task<Test> UpdateTestAsync([Service] TestSystemDbContext context, Test updateTest)
         {
             var test = context.Tests.Update(updateTest);

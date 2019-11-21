@@ -1,13 +1,8 @@
 ﻿using CW.TestSystem.Model.CoreEntities;
 using HotChocolate.Types;
-using System;
-using System.Collections.Generic;
 
 namespace CW.TestSystem.BusinessLogic.Types.InputModels
 {
-    /// <summary>
-    /// Rather strange class - in case many bugs with implementation with "normal" Test model
-    /// </summary>
     public class TestInput : InputObjectType<Test>
     {
         protected override void Configure(IInputObjectTypeDescriptor<Test> descriptor)

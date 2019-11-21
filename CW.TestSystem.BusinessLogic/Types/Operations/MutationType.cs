@@ -37,6 +37,8 @@ namespace CW.TestSystem.BusinessLogic.Types.Operations
                 Name("updateTest").
                 Type<TestType>().
                 Argument("updateTest", x => x.Type<TestInput>());
+            descriptor.Field<TestMutationResolver>(x => x.AddQuestionsAsync(default, default)).
+                Name("addQuestions");
             #endregion
 
             #region Tag Type
