@@ -27,6 +27,15 @@ namespace CW.TestSystem.BusinessLogic.Logic.Commands
             await context.SaveChangesAsync();
             return true;
         }
+
+        public async Task<bool> RemoveQuestionsAsync([Service] TestSystemDbContext context, TestQuestionRelation testQuestions)
+        {
+            testQuestions.TestsQuestions.ToList().ForEach(x => x.TestId = testQuestions.TestId);
+            context.TestQuestion.RemoveRange(testQuestions.TestsQuestions);
+            await context.SaveChangesAsync();
+            return true;
+        }
+
         public async Task<Test> UpdateTestAsync([Service] TestSystemDbContext context, Test updateTest)
         {
             var test = context.Tests.Update(updateTest);
@@ -40,6 +49,22 @@ namespace CW.TestSystem.BusinessLogic.Logic.Commands
             await context.SaveChangesAsync();
             var result = state == EntityState.Deleted ? true : false;
             return result;
+        }
+
+        public async Task<bool> AddTagsAsync([Service] TestSystemDbContext context, TagTestRelation tagTest)
+        {
+            tagTest.TestsTags.ToList().ForEach(x => x.TestId = tagTest.TestId);
+            context.TestTag.AddRange(tagTest.TestsTags);
+            await context.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<bool> RemoveTagsAsync([Service] TestSystemDbContext context, TagTestRelation tagTest)
+        {
+            tagTest.TestsTags.ToList().ForEach(x => x.TestId = tagTest.TestId);
+            context.TestTag.RemoveRange(tagTest.TestsTags);
+            await context.SaveChangesAsync();
+            return true;
         }
     }
 }

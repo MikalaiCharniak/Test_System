@@ -22,6 +22,11 @@ namespace CW.TestSystem.BusinessLogic.Types.Operations
                 Name("removeQuestion").
                 Type<BooleanType>().
                 Argument("id", x => x.Type<IdType>());
+            descriptor.Field<QuestionMutationResolver>(x => x.AddTagsAsync(default, default)).
+                Name("addTagToQuestion");
+            descriptor.Field<QuestionMutationResolver>(x => x.RemoveTagsAsync(default, default)).
+                Name("removeQuestionTag");
+
             #endregion
 
             #region TestType
@@ -39,6 +44,12 @@ namespace CW.TestSystem.BusinessLogic.Types.Operations
                 Argument("updateTest", x => x.Type<TestInput>());
             descriptor.Field<TestMutationResolver>(x => x.AddQuestionsAsync(default, default)).
                 Name("addQuestions");
+            descriptor.Field<TestMutationResolver>(x => x.RemoveQuestionsAsync(default, default)).
+                Name("removeQuestions");
+            descriptor.Field<TestMutationResolver>(x => x.AddTagsAsync(default, default)).
+                Name("addTagsToTest");
+            descriptor.Field<TestMutationResolver>(x => x.RemoveTagsAsync(default, default)).
+                Name("removeTestTags");
             #endregion
 
             #region Tag Type

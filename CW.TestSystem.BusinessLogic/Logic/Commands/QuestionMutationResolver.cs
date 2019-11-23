@@ -4,6 +4,8 @@ using HotChocolate;
 using System;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using CW.TestSystem.BusinessLogic.Infrastructure.RelationModels;
+using System.Linq;
 
 namespace CW.TestSystem.BusinessLogic.Logic.Commands
 {
@@ -29,6 +31,22 @@ namespace CW.TestSystem.BusinessLogic.Logic.Commands
             await context.SaveChangesAsync();
             var result = state == EntityState.Deleted ? true : false;
             return result;
+        }
+
+        public async Task<bool> AddTagsAsync([Service] TestSystemDbContext context, TagQuestionRelation tagQuestion)
+        {
+            tagQuestion.QuestionsTags.ToList().ForEach(x => x.QuestionId = tagQuestion.QuestionId);
+            context.QuestionTag.AddRange(tagQuestion.QuestionsTags);
+            await context.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<bool> RemoveTagsAsync([Service] TestSystemDbContext context, TagQuestionRelation tagQuestion)
+        {
+            tagQuestion.QuestionsTags.ToList().ForEach(x => x.QuestionId = tagQuestion.QuestionId);
+            context.QuestionTag.RemoveRange(tagQuestion.QuestionsTags);
+            await context.SaveChangesAsync();
+            return true;
         }
     }
 }

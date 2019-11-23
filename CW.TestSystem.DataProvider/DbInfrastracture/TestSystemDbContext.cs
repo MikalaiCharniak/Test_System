@@ -25,6 +25,8 @@ namespace CW.TestSystem.DataProvider.DbInfrastracture
         public DbSet<TestQuestion> TestQuestion { get; set; }
         public DbSet<Answer> Answers { get; set; }
         public DbSet<Tag> Tags { get; set; }
+        public DbSet<QuestionTag> QuestionTag { get; set; }
+        public DbSet<TestTag> TestTag { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Result> Results { get; set; }
     }
